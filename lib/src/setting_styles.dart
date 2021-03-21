@@ -13,7 +13,8 @@ TextStyle kGetDefaultTitleStyle(BuildContext context, ItemPriority priority) {
     case ItemPriority.disabled:
       return const TextStyle(fontSize: 14.0, color: Color(0xff9a9fa7));
     default:
-      return const TextStyle(fontSize: 14.0, color: Color(0xff5f6369));
+      return Theme.of(context).textTheme.subtitle1.copyWith(fontSize: 14.0);
+    // TextStyle(fontSize: 14.0, color: Color(0xff5f6369));
   }
 }
 
@@ -27,7 +28,8 @@ TextStyle kGetDefaultSubTitleStyle(
     case ItemPriority.disabled:
       return const TextStyle(fontSize: 12.0, color: Color(0xffbdbdbd));
     default:
-      return const TextStyle(fontSize: 12.0, color: Color(0xff757575));
+      // return const TextStyle(fontSize: 12.0, color: Color(0xff757575));
+      return Theme.of(context).textTheme.subtitle2.copyWith(fontSize: 12.0);
   }
 }
 
