@@ -31,7 +31,8 @@ class SettingSwitchItem extends StatelessWidget {
           style: titleStyle ?? kGetDefaultTitleStyle(context, priority)),
       subtitle: description != null
           ? Text(description,
-              style: description ?? kGetDefaultSubTitleStyle(context, priority))
+              style: descriptionStyle ??
+                  kGetDefaultSubTitleStyle(context, priority))
           : null,
       value: value,
       onChanged: priority == ItemPriority.disabled ? null : onChanged,
