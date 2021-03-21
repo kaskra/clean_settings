@@ -6,7 +6,9 @@ import 'setting_styles.dart';
 
 class SettingWheelPickerItem<T> extends StatelessWidget {
   final String title;
+  final TextStyle titleStyle;
   final String displayValue;
+  final TextStyle displayValueStyle;
   final String hintText;
   final String pickerSuffix;
   final List<T> items;
@@ -21,6 +23,8 @@ class SettingWheelPickerItem<T> extends StatelessWidget {
     @required this.onChanged,
     @required this.displayValue,
     @required this.items,
+    this.titleStyle,
+    this.displayValueStyle,
     this.initialValueIndex = 0,
     this.hintText,
     this.pickerSuffix,
@@ -32,7 +36,9 @@ class SettingWheelPickerItem<T> extends StatelessWidget {
     return SettingItem(
       priority: priority,
       title: title,
+      titleStyle: titleStyle,
       displayValue: displayValue,
+      displayValueStyle: displayValueStyle,
       onTap: () async {
         var changedValueIndex = await showDialog(
           context: context,

@@ -1,3 +1,11 @@
+## 0.2.1
+
+* Added custom styling option and use of Theme.of(context)
+
+## 0.2.0
+
+* Added support for Flutter 2.0
+
 ## 0.1.5
 
 * Added support for Switch item (Thanks to @gkathir15)

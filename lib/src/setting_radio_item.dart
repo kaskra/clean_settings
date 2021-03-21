@@ -6,12 +6,15 @@ import 'setting_styles.dart';
 class SettingRadioValue<T> {
   final String title;
   final T value;
+
   SettingRadioValue(this.title, this.value);
 }
 
 class SettingRadioItem<T> extends StatelessWidget {
   final String title;
+  final TextStyle titleStyle;
   final String displayValue;
+  final TextStyle displayValueStyle;
   final T selectedValue;
 
   final List<SettingRadioValue<T>> items;
@@ -24,6 +27,8 @@ class SettingRadioItem<T> extends StatelessWidget {
     @required this.title,
     @required this.items,
     @required this.onChanged,
+    this.titleStyle,
+    this.displayValueStyle,
     this.displayValue,
     this.selectedValue,
     this.cancelText,
@@ -35,7 +40,9 @@ class SettingRadioItem<T> extends StatelessWidget {
     return SettingItem(
       priority: priority,
       title: title,
+      titleStyle: titleStyle,
       displayValue: displayValue,
+      displayValueStyle: displayValueStyle,
       onTap: () async {
         var changedValue = await showDialog(
           context: context,
