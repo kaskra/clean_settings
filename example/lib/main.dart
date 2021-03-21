@@ -22,7 +22,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int counter = 0;
   String theme = 'System Default';
   bool smartReply = false;
@@ -47,7 +46,6 @@ class _HomeState extends State<Home> {
 
     var replyOptions = ['Reply', 'Reply All', 'Last Chosen', 'None'];
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
           'App Settings',
@@ -119,11 +117,11 @@ class _HomeState extends State<Home> {
                   priority: disableDemoItems
                       ? ItemPriority.disabled
                       : ItemPriority.high,
-                  onConfirm: () => _scaffoldKey.currentState.showSnackBar(
+                  onConfirm: () => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                           content: Text('Confirmed!'),
                           duration: Duration(seconds: 3))),
-                  onCancel: () => _scaffoldKey.currentState.showSnackBar(
+                  onCancel: () => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                           content: Text('Canceled!'),
                           duration: Duration(seconds: 3))),

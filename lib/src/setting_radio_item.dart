@@ -60,7 +60,7 @@ class SettingRadioItem<T> extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    FlatButton(
+                    TextButton(
                         child: Text(cancelText ?? 'Cancel'),
                         onPressed: () => Navigator.pop(context)),
                   ],
