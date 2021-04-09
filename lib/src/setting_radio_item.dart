@@ -12,10 +12,10 @@ class SettingRadioValue<T> {
 
 class SettingRadioItem<T> extends StatelessWidget {
   final String title;
-  final TextStyle titleStyle;
-  final String displayValue;
-  final TextStyle displayValueStyle;
-  final T selectedValue;
+  final TextStyle? titleStyle;
+  final String? displayValue;
+  final TextStyle? displayValueStyle;
+  final T? selectedValue;
 
   final List<SettingRadioValue<T>> items;
   final ValueChanged<T> onChanged;
@@ -23,15 +23,15 @@ class SettingRadioItem<T> extends StatelessWidget {
   final ItemPriority priority;
 
   const SettingRadioItem({
-    Key key,
-    @required this.title,
-    @required this.items,
-    @required this.onChanged,
+    Key? key,
+    required this.title,
+    required this.items,
+    required this.onChanged,
     this.titleStyle,
     this.displayValueStyle,
     this.displayValue,
     this.selectedValue,
-    this.cancelText,
+    this.cancelText = 'Cancel',
     this.priority = ItemPriority.normal,
   }) : super(key: key);
 
@@ -50,7 +50,7 @@ class SettingRadioItem<T> extends StatelessWidget {
             title: Text(title),
             children: [
               ...items
-                  .map((e) => RadioListTile(
+                  .map((e) => RadioListTile<T>(
                         autofocus: true,
                         selected: e.value == selectedValue,
                         dense: true,
@@ -68,7 +68,7 @@ class SettingRadioItem<T> extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                        child: Text(cancelText ?? 'Cancel'),
+                        child: Text(cancelText),
                         onPressed: () => Navigator.pop(context)),
                   ],
                 ),

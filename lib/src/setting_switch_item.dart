@@ -4,19 +4,19 @@ import 'setting_styles.dart';
 
 class SettingSwitchItem extends StatelessWidget {
   final String title;
-  final TextStyle titleStyle;
-  final String description;
-  final TextStyle descriptionStyle;
+  final TextStyle? titleStyle;
+  final String? description;
+  final TextStyle? descriptionStyle;
   final ItemPriority priority;
 
   final bool value;
   final ValueChanged<bool> onChanged;
 
   const SettingSwitchItem({
-    Key key,
-    @required this.title,
-    @required this.value,
-    @required this.onChanged,
+    Key? key,
+    required this.title,
+    required this.value,
+    required this.onChanged,
     this.titleStyle,
     this.descriptionStyle,
     this.priority = ItemPriority.normal,
@@ -30,7 +30,7 @@ class SettingSwitchItem extends StatelessWidget {
       title: Text(title,
           style: titleStyle ?? kGetDefaultTitleStyle(context, priority)),
       subtitle: description != null
-          ? Text(description,
+          ? Text(description!,
               style: descriptionStyle ??
                   kGetDefaultSubTitleStyle(context, priority))
           : null,

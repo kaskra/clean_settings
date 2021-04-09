@@ -6,11 +6,11 @@ import 'setting_styles.dart';
 
 class SettingWheelPickerItem<T> extends StatelessWidget {
   final String title;
-  final TextStyle titleStyle;
-  final String displayValue;
-  final TextStyle displayValueStyle;
-  final String hintText;
-  final String pickerSuffix;
+  final TextStyle? titleStyle;
+  final String? displayValue;
+  final TextStyle? displayValueStyle;
+  final String? hintText;
+  final String? pickerSuffix;
   final List<T> items;
   final int initialValueIndex;
 
@@ -18,11 +18,11 @@ class SettingWheelPickerItem<T> extends StatelessWidget {
   final ItemPriority priority;
 
   const SettingWheelPickerItem({
-    Key key,
-    @required this.title,
-    @required this.onChanged,
-    @required this.displayValue,
-    @required this.items,
+    Key? key,
+    required this.title,
+    required this.onChanged,
+    required this.displayValue,
+    required this.items,
     this.titleStyle,
     this.displayValueStyle,
     this.initialValueIndex = 0,
@@ -44,7 +44,7 @@ class SettingWheelPickerItem<T> extends StatelessWidget {
           context: context,
           builder: (_) {
             var selectedValueIndex = initialValueIndex;
-            var pickerWidget = Expanded(
+            final pickerWidget = Expanded(
               child: CupertinoPicker(
                 scrollController:
                     FixedExtentScrollController(initialItem: initialValueIndex),
@@ -53,11 +53,13 @@ class SettingWheelPickerItem<T> extends StatelessWidget {
                   selectedValueIndex = value;
                 },
                 children: items
-                    .map((e) => Center(
-                            child: Text(
-                          e.toString(),
-                          style: kWheelPickerItem,
-                        )))
+                    .map(
+                      (e) => Center(
+                          child: Text(
+                        e.toString(),
+                        style: kWheelPickerItem,
+                      )),
+                    )
                     .toList(),
               ),
             );
@@ -72,16 +74,18 @@ class SettingWheelPickerItem<T> extends StatelessWidget {
                         ? [pickerWidget]
                         : [
                             SizedBox(width: 100.0, child: pickerWidget),
-                            Text(pickerSuffix)
+                            Text(pickerSuffix!)
                           ]),
               ),
               actions: <Widget>[
                 TextButton(
-                    child: const Text('Cancel'),
-                    onPressed: () => Navigator.pop(context)),
+                  child: const Text('Cancel'),
+                  onPressed: () => Navigator.pop(context),
+                ),
                 TextButton(
-                    child: const Text('OK'),
-                    onPressed: () => Navigator.pop(context, selectedValueIndex))
+                  child: const Text('OK'),
+                  onPressed: () => Navigator.pop(context, selectedValueIndex),
+                )
               ],
             );
           },

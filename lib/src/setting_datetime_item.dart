@@ -5,10 +5,10 @@ import 'setting_styles.dart';
 
 class SettingDateTimeItem<T> extends StatelessWidget {
   final String title;
-  final TextStyle titleStyle;
+  final TextStyle? titleStyle;
   final String displayValue;
-  final TextStyle displayValueStyle;
-  final DateTime initialDate;
+  final TextStyle? displayValueStyle;
+  final DateTime? initialDate;
 
   final ValueChanged<T> onChanged;
   final bool timePicker;
@@ -16,10 +16,10 @@ class SettingDateTimeItem<T> extends StatelessWidget {
   final ItemPriority priority;
 
   SettingDateTimeItem({
-    Key key,
-    @required this.title,
-    @required this.onChanged,
-    @required this.displayValue,
+    Key? key,
+    required this.title,
+    required this.onChanged,
+    required this.displayValue,
     this.titleStyle,
     this.displayValueStyle,
     this.initialDate,
@@ -37,11 +37,11 @@ class SettingDateTimeItem<T> extends StatelessWidget {
     return SettingItem(
         priority: priority,
         title: title,
-        titleStyle: titleStyle,
+        titleStyle: titleStyle!,
         displayValue: displayValue,
-        displayValueStyle: displayValueStyle,
+        displayValueStyle: displayValueStyle!,
         onTap: () async {
-          DateTime datePicked;
+          DateTime? datePicked;
           if (datePicker) {
             datePicked = await showDatePicker(
               context: context,
@@ -55,10 +55,12 @@ class SettingDateTimeItem<T> extends StatelessWidget {
             }
           }
 
-          if (!timePicker) {
-            onChanged(
-                DateTime(datePicked.year, datePicked.month, datePicked.day)
-                    as T);
+          if (!timePicker && datePicker) {
+            onChanged(DateTime(
+              datePicked!.year,
+              datePicked.month,
+              datePicked.day,
+            ) as T);
             return;
           }
 
@@ -77,7 +79,7 @@ class SettingDateTimeItem<T> extends StatelessWidget {
           }
 
           onChanged(DateTime(
-            datePicked.year,
+            datePicked!.year,
             datePicked.month,
             datePicked.day,
             todPicked.hour,

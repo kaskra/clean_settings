@@ -5,19 +5,19 @@ import 'setting_styles.dart';
 
 class SettingPageItem extends StatelessWidget {
   final String title;
-  final TextStyle titleStyle;
-  final String displayValue;
-  final TextStyle displayValueStyle;
+  final TextStyle? titleStyle;
+  final String? displayValue;
+  final TextStyle? displayValueStyle;
   final GestureTapCallback onTap;
   final ItemPriority priority;
 
   const SettingPageItem({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
+    required this.onTap,
     this.titleStyle,
     this.displayValue,
     this.displayValueStyle,
-    @required this.onTap,
     this.priority = ItemPriority.normal,
   }) : super(key: key);
 
@@ -31,13 +31,13 @@ class SettingPageItem extends StatelessWidget {
           style: titleStyle ?? kGetDefaultTitleStyle(context, priority)),
       trailing: const Icon(Icons.chevron_right),
       subtitle: displayValue != null
-          ? Text(displayValue,
+          ? Text(displayValue!,
               style: displayValueStyle ??
                   kGetDefaultSubTitleStyle(context, priority))
           : null,
     );
     return priority == ItemPriority.disabled
         ? listTile
-        : InkWell(onTap: onTap ?? () {}, child: listTile);
+        : InkWell(onTap: onTap, child: listTile);
   }
 }

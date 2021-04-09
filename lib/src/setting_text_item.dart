@@ -5,20 +5,20 @@ import 'setting_styles.dart';
 
 class SettingTextItem extends StatelessWidget {
   final String title;
-  final TextStyle titleStyle;
-  final String displayValue;
-  final TextStyle displayValueStyle;
-  final String hintText;
-  final String initialValue;
+  final TextStyle? titleStyle;
+  final String? displayValue;
+  final TextStyle? displayValueStyle;
+  final String? hintText;
+  final String? initialValue;
 
   final ValueChanged<String> onChanged;
   final ItemPriority priority;
 
   const SettingTextItem({
-    Key key,
-    @required this.title,
-    @required this.onChanged,
-    @required this.displayValue,
+    Key? key,
+    required this.title,
+    required this.onChanged,
+    required this.displayValue,
     this.titleStyle,
     this.displayValueStyle,
     this.initialValue,
@@ -35,10 +35,10 @@ class SettingTextItem extends StatelessWidget {
       displayValue: displayValue,
       displayValueStyle: displayValueStyle,
       onTap: () async {
-        var changedValue = await showDialog(
+        final changedValue = await showDialog(
           context: context,
           builder: (_) {
-            var controller = TextEditingController(text: initialValue);
+            final controller = TextEditingController(text: initialValue);
             return AlertDialog(
               title: Text(title),
               contentPadding: const EdgeInsets.all(16.0),

@@ -4,40 +4,40 @@ import 'setting_styles.dart';
 
 class SettingConfirmItem extends StatelessWidget {
   final String title;
-  final TextStyle titleStyle;
-  final String displayValue;
+  final TextStyle? titleStyle;
+  final String? displayValue;
   final String alertMessage;
-  final String alertTitle;
+  final String? alertTitle;
   final VoidCallback onConfirm;
-  final VoidCallback onCancel;
+  final VoidCallback? onCancel;
   final String okButtonText;
   final String cancelButtonText;
   final ItemPriority priority;
 
   const SettingConfirmItem({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
+    required this.onConfirm,
     this.titleStyle,
-    this.alertMessage,
-    @required this.onConfirm,
+    this.alertMessage = '',
     this.alertTitle,
     this.displayValue,
     this.onCancel,
-    this.okButtonText,
-    this.cancelButtonText,
+    this.okButtonText = 'Ok',
+    this.cancelButtonText = 'Cancel',
     this.priority = ItemPriority.normal,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var listTile = ListTile(
+    final listTile = ListTile(
       dense: true,
       visualDensity: VisualDensity.comfortable,
       contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
       title: Text(title,
           style: titleStyle ?? kGetDefaultTitleStyle(context, priority)),
       subtitle: displayValue != null
-          ? Text(displayValue,
+          ? Text(displayValue!,
               style: kGetDefaultSubTitleStyle(context, priority))
           : null,
     );
@@ -47,7 +47,7 @@ class SettingConfirmItem extends StatelessWidget {
   }
 
   Future<void> _showConfirmDialog(BuildContext context) async {
-    var result = await showDialog(
+    final result = await showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
               title: Text(alertTitle ?? title),
@@ -55,18 +55,18 @@ class SettingConfirmItem extends StatelessWidget {
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, false),
-                  child: Text(cancelButtonText ?? 'Cancel'),
+                  child: Text(cancelButtonText),
                 ),
                 TextButton(
                   onPressed: () => Navigator.pop(context, true),
-                  child: Text(okButtonText ?? 'Ok'),
+                  child: Text(okButtonText),
                 ),
               ],
             ));
     if (result) {
       onConfirm();
     } else {
-      if (onCancel != null) onCancel();
+      if (onCancel != null) onCancel!();
     }
   }
 }
